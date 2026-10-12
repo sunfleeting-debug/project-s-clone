@@ -1,0 +1,26 @@
+/* =============================================================================
+   offline.css —— 离线副本的最小补充样式
+   原站的观感由 assets/css/site.css（原站样式表）+ assets/css/vendor/lenis.css 承担；
+   本文件**不参与还原观感**，只处理两件离线环境特有的兜底。
+   ============================================================================= */
+
+/* 1. 预加载层看门狗兜底
+      原站的预加载动画由 site-motion.js 驱动收尾。若因离线环境（WebGL 被禁、
+      脚本被拦截等）未能收尾，内容会被永久盖住 —— 超时后由 offline-compat.js
+      给 <html> 加 .motion-off，这里负责把它强制收起。 */
+html.motion-off [data-master-preloader],
+html.motion-off [data-preloader] { display: none !important; }
+html.motion-off .transition-container {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+/* 2. 离线表单提示条（原站提交到 Webflow 后端，离线无后端） */
+html.motion-off .offline-form-note,
+.offline-form-note {
+  margin-top: .75rem;
+  font-size: .875rem;
+  line-height: 1.4;
+  opacity: .7;
+}
